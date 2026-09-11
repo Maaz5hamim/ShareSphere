@@ -2,7 +2,7 @@
 
 > **Share. Collaborate. Thrive.**
 
-A full-stack peer-to-peer file sharing desktop application built from scratch in Rust — featuring a native GUI client and a concurrent async server with a MySQL backend.
+A full-stack peer-to-peer file sharing desktop application built from scratch in Rust, featuring a native GUI client and a concurrent async server with a MySQL backend.
 
 ![Rust](https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white)
 ![Tokio](https://img.shields.io/badge/Tokio-async-blue?style=for-the-badge)
@@ -26,17 +26,17 @@ ShareSphere lets users upload files to a central server and selectively share th
 
 ```
 ┌─────────────────────────────────┐        TCP (bincode)        ┌──────────────────────────────────┐
-│         CLIENT (egui)           │ ◄─────────────────────────► │          SERVER (Tokio)           │
-│                                 │                              │                                   │
-│  ┌──────────┐  ┌─────────────┐  │     Request { email,        │  ┌────────────┐  ┌─────────────┐  │
-│  │  UI      │  │  request/   │  │       service: RequestType} │  │  request_  │  │  service/   │  │
-│  │  (pages) │─►│  service.rs │──┼────────────────────────────►│  │  handler  │─►│  database   │  │
-│  └──────────┘  └─────────────┘  │                              │  └────────────┘  └─────────────┘  │
-│                                 │◄────────────────────────────┤                       │            │
-│  Pages: Splash, Login, Signup,  │      Response enum          │                   MySQL DB         │
-│         Home, MyFiles,          │                              │  (user, file, shared_with tables) │
-│         SharedFiles, Folder     │                              │                                   │
-└─────────────────────────────────┘                              └──────────────────────────────────┘
+│         CLIENT (egui)           │ ◄─────────────────────────► │          SERVER (Tokio)          │
+│                                 │                             │                                  │
+│  ┌──────────┐  ┌─────────────┐  │     Request { email,        │  ┌────────────┐  ┌─────────────  │
+│  │  UI      │  │  request/   │  │       service: RequestType} │  │  request_  │  │  service/   │ │
+│  │  (pages) │─►│  service.rs │──┼────────────────────────────►│  │  handler   │─►│  database   │ │
+│  └──────────┘  └─────────────┘  │                             │  └────────────┘  └─────────────┘ │
+│                                 │◄────────────────────────────┤                      │           │
+│  Pages: Splash, Login, Signup,  │      Response enum          │                  MySQL DB        │
+│         Home, MyFiles,          │                             │ (user, file, shared_with tables) │
+│         SharedFiles, Folder     │                             │                                  │
+└─────────────────────────────────┘                             └──────────────────────────────────┘
 ```
 
 ---
